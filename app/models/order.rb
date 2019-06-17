@@ -5,4 +5,10 @@ class Order < ApplicationRecord
 
   validates :total, numericality: { greater_than_or_equal_to: 0 }
   validates :total, presence: true
+
+  before_validation :set_total!
+
+  def set_total!
+    self.total = self.products.map(&:price).sum
+  end
 end
