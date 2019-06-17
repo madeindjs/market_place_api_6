@@ -6,12 +6,12 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should forbid orders for unlogged' do
-    get api_v1_user_orders_url(user_id: @order.user_id), as: :json
+    get api_v1_orders_url, as: :json
     assert_response :forbidden
   end
 
   test 'should show orders' do
-    get api_v1_user_orders_url(user_id: @order.user_id), headers: { Authorization: JsonWebToken.encode(user_id: @order.user_id) },  as: :json
+    get api_v1_orders_url, headers: { Authorization: JsonWebToken.encode(user_id: @order.user_id) },  as: :json
     assert_response :success
 
     json_response = JSON.parse(response.body)
@@ -19,7 +19,7 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show order' do
-    get api_v1_user_order_url(user_id: @order.user_id, id: @order.id),
+    get api_v1_order_url(id: @order.id),
       headers: { Authorization: JsonWebToken.encode(user_id: @order.user_id) },
       as: :json
     assert_response :success
