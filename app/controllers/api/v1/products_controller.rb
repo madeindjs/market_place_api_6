@@ -11,6 +11,7 @@ class Api::V1::ProductsController < ApplicationController
                        .search(params)
 
     options = get_links_serializer_options('api_v1_products_path', @products)
+    options[:include] = [:user]
 
     render json: ProductSerializer.new(@products, options).serializable_hash
   end
