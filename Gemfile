@@ -49,6 +49,6 @@ gem "faker", "~> 1.9"
 
 gem "jsonapi-serializer", "~> 2.1"
 
-gem "kaminari", "~> 1.1"
+gem "kaminari", "~> 1.2"
 
 gem "bullet", "~> 6.0", :group => :development
