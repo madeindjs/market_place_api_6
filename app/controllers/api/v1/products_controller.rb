@@ -6,7 +6,8 @@ class Api::V1::ProductsController < ApplicationController
   before_action :check_owner, only: %i[update destroy]
 
   def index
-    @products = Product.page(current_page)
+    @products = Product.includes(:user)
+                       .page(current_page)
                        .per(per_page)
                        .search(params)
 
